@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import NavBar from "./NavBar";
 import data from "./students.json";
 import ReactPaginate from "react-paginate";
@@ -10,26 +10,18 @@ const Table = () => {
   const [female, setFemale] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearchChange = (event: {
-    target: { value: SetStateAction<string> };
-  }) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
-  const handleActivechange = (event: {
-    target: { checked: boolean | ((prevState: boolean) => boolean) };
-  }) => {
+  const handleActivechange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setActive(event.target.checked);
   };
 
-  const handleInactiveChange = (event: {
-    target: { checked: boolean | ((prevState: boolean) => boolean) };
-  }) => {
+  const handleInactiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInactive(event.target.checked);
   };
 
-  const handleMaleChange = (event: {
-    target: { checked: boolean | ((prevState: boolean) => boolean) };
-  }) => {
+  const handleMaleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMale(event.target.checked);
   };
 
@@ -83,7 +75,7 @@ const Table = () => {
     });
 
   const pageCount = Math.ceil(data.length / studentsPerPage);
-  const changePage = ({ selected }) => {
+  const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected);
   };
   return (

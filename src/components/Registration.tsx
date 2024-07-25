@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const navigate = useNavigate();
-  const [url, setUrl] = useState("");
-  const [name, setName] = useState("");
+  const [url, setUrl] = useState<string | null>(null);
+  const [name, setName] = useState<string>("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -18,11 +18,11 @@ const Registration = () => {
     localStorage.setItem("name", name);
   });
 
-  const uploader = (file: Blob) => {
+  const uploader = (file: File) => {
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-      localStorage.setItem("recent-image", reader.result);
-      setUrl(reader.result);
+      localStorage.setItem("recent-image", reader.result as string);
+      setUrl(reader.result as string);
     });
     reader.readAsDataURL(file);
   };

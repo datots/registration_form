@@ -5,7 +5,7 @@ import Posts from "./Posts";
 import Pagination from "./Pagination";
 const FetchData = () => {
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [postsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +24,7 @@ const FetchData = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   return (
     <div className="App container mx-auto p-4">
       <button className="float-right" onClick={() => navigate("/form")}>

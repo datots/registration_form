@@ -7,7 +7,7 @@ const FetchData = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [postsPerPage, setPostsPerPaeg] = useState(5);
+  const [postsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {

@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Start />} />
+        <Route path="/" element={<Start />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/form" element={<Table />} />
         <Route path="/apidata" element={<ApiData />} />

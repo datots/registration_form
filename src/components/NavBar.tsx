@@ -41,6 +41,7 @@ const NavBar = () => {
         <button onClick={() => navigation("/apidata")}>API</button>
         <p>{name}</p>
       </div>
+      <p>Press On Image To LogOut</p>
       <img src={image} className="rounded-full" onClick={ModalOpen} />
 
       {OpenModal && (

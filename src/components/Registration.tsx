@@ -5,7 +5,7 @@ const Registration = () => {
   const navigate = useNavigate();
   const [url, setUrl] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const storedName = localStorage.getItem("name");
@@ -16,7 +16,7 @@ const Registration = () => {
 
   useEffect(() => {
     localStorage.setItem("name", name);
-  });
+  }, [name]);
 
   const uploader = (file: File) => {
     const reader = new FileReader();
@@ -28,8 +28,15 @@ const Registration = () => {
   };
 
   useEffect(() => {
-    return setUrl(localStorage.getItem("recent-image"));
+    setUrl(localStorage.getItem("recent-image"));
   }, []);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files[0]) {
+      uploader(files[0]);
+    }
+  };
 
   const SignInhandle = () => {
     if (!name) {
@@ -43,29 +50,27 @@ const Registration = () => {
     setError("");
     navigate("/form");
   };
+
   return (
     <div className="flex flex-col items-center bg-black h-screen">
       <div className="bg-white mt-20 p-14 rounded-lg flex flex-col items-center">
         <p className="m-4 text-2xl">Get Started</p>
         <p className="m-4 text-xl">Add photo</p>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(event) => uploader(event.target.files[0])}
-        />
-        <p className="m-4 text-xl">fill your name</p>
+        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <p className="m-4 text-xl">Fill your name</p>
         <input
           value={name}
           onChange={(event) => setName(event.target.value)}
           type="text"
-          placeholder="your name"
+          placeholder="Your name"
           className="mb-8"
         />
-        {error && <p className="text-red-950 mt-2">{error}</p>}
-        <button className="bg-blue-500 rounded-lg w-36 h-8">
-          <p className="" onClick={SignInhandle}>
-            Sign in
-          </p>
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+        <button
+          className="bg-blue-500 rounded-lg w-36 h-8"
+          onClick={SignInhandle}
+        >
+          <p className="text-white">Sign in</p>
         </button>
       </div>
     </div>
